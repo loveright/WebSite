@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.by.mapper.StudentMapper">	
+    <select id="queryStudentByStuno" resultType="com.by.entity.Student" parameterType="int">
+        select * from student where stuno = #{stuNo}
+    </select>      
+    <insert id="addStudent" parameterType="com.by.entity.Student">
+    	insert into student(stuno,stuname,stuage) values(#{stuNo},#{stuName},#{stuAge})
+    </insert>   	
+    
+</mapper>

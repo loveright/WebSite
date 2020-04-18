@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.by.mapper.UserMapper">	
+   	<select id="getUserByName" parameterType="String" resultType="user">
+   		select uid,uname,upassword,uemail,uroot,rtime from usertable where uname = #{uname}
+   	</select>
+   	<select id="getUserByEmail" parameterType="String" resultType="user">
+   		select uid,uname,upassword,uemail,uroot,rtime from usertable where uemail = #{uemail}
+   	</select>
+   	<select id="userLogin" parameterType="HashMap" resultType="user">
+   		select uid,uname,upassword,uemail,uroot,rtime from usertable where uname = #{uname} and upassword = #{upassword}
+   	</select>
+   	<select id="getPostings" parameterType="int" resultType="postings">
+   		select postingid,userid from postingtable where userid = #{userid}
+   	</select>
+   	<select id="getReviews" parameterType="int" resultType="reviews">
+   		select reviewid,lastid,postingid,userid,context,reviewtime from reviewtable where userid = #{userid}
+   	</select>
+   	<select id="getUserName" parameterType="int" resultType="String">
+   		select uname from usertable where uid = #{uid}
+   	</select>
+   	<select id="getReviewsAndUser" parameterType="int" resultMap="review_and_user">
+   		select r.*,u.uid,u.uname,u.uroot from reviewtable r inner join usertable u on r.userid = u.uid where reviewid = #{reviewId}
+   	</select>   	
+   	<resultMap type="reviews" id="review_and_user">
+   		<id property="reviewId" column="reviewid"/>
+    	<result property="lastId" column="lastid"/>
+    	<result property="postingId" column="postingid"/>
+    	<result property="userId" column="userid"/>
+    	<result property="context" column="context"/>
+    	<result property="reviewTime" column="reviewtime"/>
+    	<!-- 一对一时，对象成员使用association映射 javaType指定该属性的类型-->
+    	<association property="user" javaType="user">
+    		<id property="uid" column="uid" />
+    		<result property="uname" column="uname"/>    		    	
+    		<result property="uroot" column="uroot"/>    		
+    	</association>    	
+   	</resultMap>
+   	<select id="getAllMessage" parameterType="int" resultMap="allmessage">
+   		select r.*,u.uid,u.uname,u.uroot from reviewtable r inner join usertable u on r.userid = u.uid 
+   	</select>   	
+   	<resultMap type="reviews" id="allmessage">
+   		<id property="reviewId" column="reviewid"/>
+    	<result property="lastId" column="lastid"/>
+    	<result property="postingId" column="postingid"/>
+    	<result property="userId" column="userid"/>
+    	<result property="context" column="context"/>
+    	<result property="reviewTime" column="reviewtime"/>
+    	<!-- 一对一时，对象成员使用association映射 javaType指定该属性的类型-->
+    	<association property="user" javaType="user">
+    		<id property="uid" column="uid" />
+    		<result property="uname" column="uname"/>    		    	
+    		<result property="uroot" column="uroot"/>    		
+    	</association>    	
+   	</resultMap>
+   	<select id="getAllPostings" resultType="postings">
+   		select * from postingtable
+   	</select> 
+   	<select id="getSomePostings" resultType="postings" parameterType="pageinfo">
+   		(select * from postingtable order by postingid desc limit #{pageNum},#{pageSize}) order by postingid   		
+   	</select>  	
+   	<select id="getReviewsByPostingId" parameterType="int" resultMap="bypostingid">
+   		select r.*,u.uid,u.uname,u.uroot from reviewtable r inner join usertable u on r.userid = u.uid where postingid = #{postingId}
+   	</select>   	
+   	<resultMap type="reviews" id="bypostingid">
+   		<id property="reviewId" column="reviewid"/>
+    	<result property="lastId" column="lastid"/>
+    	<result property="postingId" column="postingid"/>
+    	<result property="userId" column="userid"/>
+    	<result property="context" column="context"/>
+    	<result property="reviewTime" column="reviewtime"/>
+    	<!-- 一对一时，对象成员使用association映射 javaType指定该属性的类型-->
+    	<association property="user" javaType="user">
+    		<id property="uid" column="uid" />
+    		<result property="uname" column="uname"/>    		    	
+    		<result property="uroot" column="uroot"/>    		
+    	</association>    	
+   	</resultMap>
+   	<select id="getUserNameByPostingId" parameterType="int" resultType="String">
+   		select u.uname from usertable u inner join postingtable p on p.userid = u.uid where p.postingid = #{postingId}
+   	</select>
+   	<select id="getAllCountsOfReview" resultType="int">
+   		select count(*) from reviewtable
+   	</select>
+    <insert id="userRegister" parameterType="user">
+    	insert into usertable(uname,upassword,uemail,uroot,rtime) values(#{uname},
+    	#{upassword},#{uemail},#{uroot},#{rtime})
+    </insert>
+    <!-- 插入帖子记录同时返回帖子id useGeneratedKeys="true"-->
+    <insert id="insertPosting" parameterType="HashMap">
+    	insert into postingtable(userid) values(#{userid})
+    	<selectKey resultType="java.lang.Integer" keyProperty="postingId" order="AFTER">
+    		SELECT LAST_INSERT_ID()
+    	</selectKey>    	
+    </insert>
+    <insert id="insertReview" parameterType="HashMap" useGeneratedKeys="true" keyProperty="reviewId">
+    	insert into reviewtable(lastid,postingid,userid,context,reviewtime) values(#{lastid},
+    	#{postingid},#{userid},#{context},#{reviewtime})
+    </insert>
+       
+</mapper>

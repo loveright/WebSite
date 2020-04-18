@@ -1,0 +1,169 @@
+body{
+ 	width: auto;
+ 	margin: auto auto;
+ 	padding: 0;	
+ 	text-align: center;	
+ 	background: #251f2e;	
+ }
+ #body_div{
+ 	width: auto;
+ 	margin: auto auto;
+ 	padding: 0;	
+ 	text-align: center;
+ }
+ ul{
+ 	margin:0;
+ 	padding: 0;
+ }
+ li{
+ 	list-style: none;
+ }
+ a{
+ 	text-decoration: none;
+ }
+ #head{
+ 	width: 100%;
+ 	height: auto;
+ 	background: #251f2e;
+ 	color: #ffffff;
+ 
+ }
+#my_title{
+	
+	font-size: 92px;
+	font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+	
+}
+#subtitle{
+	width: 100%;
+	height: auto;
+}
+#sub_ul{
+	width: 100%;
+	height: auto;
+	
+}
+.sub_li{
+	height: auto;
+}
+.sub_li a{
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #ffffff;
+	text-decoration: none;
+}
+.sub_li a:hover{
+	font-size: 16px;
+	font-family: "微软雅黑";
+	color: #2f8f9d;
+	border-bottom: 2px solid #2f8f9d;
+}
+#content{
+	width:100%;
+	height: auto;
+	overflow: auto;
+	background: #251f2e;
+	text-align: center;
+	margin-top:20px;
+	overflow:hidden;
+}
+#content_ul{
+	width: 100%;
+	height: auto;
+}
+.content_li{
+	height: 400px;
+	width: 300px;
+	
+}
+.content_li .content_div{
+	margin:auto;		
+	overflow:hidden;
+	z-index:1;
+}
+
+.content_li .content_div img{
+	width: 300px;
+	height: 300px;
+	transition: all 1s;
+	display: inline-block;
+	z-index:2;
+}
+.content_li .content_div img:hover{
+	
+	transform:rotate(7deg) scale(1.2);
+	-webkit-transform:rotate(7deg) scale(1.2); 
+　　-moz-transform:rotate(7deg) scale(1.2);
+　　-ms-transform:rotate(7deg) scale(1.2);
+　　-o-transform:rotate(7deg) scale(1.2);
+}
+.content_li1{
+	
+}
+.content_ul_li{
+	font:25px "Georgia";
+	color: #ffffff;
+	font-weight: bold;
+	margin-top: 20px;
+	letter-spacing: 7px;
+}
+.content_ul_lii{
+	font:14px "Tahoma";
+	color: #2f8f9d;
+	margin-top: 13px;
+	
+}
+#input_div{
+	width: 220px;
+	height:60px;
+	background: #8688e3;
+	border: none;
+	border-radius: 7px;
+	margin: auto auto;
+}
+#input_div:hover{
+	width: 220px;
+	height:60px;
+	background: #8688e3;
+	border:none;
+	border-radius: 7px;
+	text-align: center;
+	margin: auto auto;
+	filter:Alpha(opacity=70);
+	opacity:0.7;
+}
+#input_button{
+	width: 220px;
+	height:60px;
+	border:none;
+	border-radius: 7px;
+	background:#8688e3;
+	color: #ffffff;
+	font:16px "微软雅黑";
+	line-height: 50px;
+	font-weight: bold;
+}
+
+.c_div1_3{
+	margin-top: 20px;
+	font:18px "Tahoma";
+	color: #ffffff;
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
